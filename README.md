@@ -1,0 +1,1 @@
+this is a Quine McCluskey algorithm. It is not done at this state but for now it gets input and sorts into a table.
