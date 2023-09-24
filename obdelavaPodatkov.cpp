@@ -39,6 +39,20 @@ int main()
         std::cin >> mintermi[i];
     }
 
+    //sortiranje mintermov po velikosti
+    for(int j = 0;j < numMintermi;j++)
+    {
+        for(int i = 1;i < numMintermi;i++)
+        {
+            if(mintermi[i-1] > mintermi[i])
+            {
+                cache = mintermi[i];
+                mintermi[i] = mintermi[i-1];
+                mintermi[i-1] = cache;
+            }
+        }
+    }
+
     for(int j = 0;j < numMintermi;j++)//preprost bubble sort za sortiranje po stevilu bitov, padajoče
     {
         for(int i = 1;i < numMintermi;i++)
@@ -54,16 +68,11 @@ int main()
     
 
     /*
-    2 je tam zato da imam "dve tabeli" med katerima preklapljamo med poenostavljanjem
     numSpremenljivke je za stevilo bitov v mintermu z vrednostjo 1
     numMintermi je za specifičen minterm kjer je njegova vrednost shranjena
     numSpremenljivke je za specifičen bit v mintermu ki je lahko shranjen tudi kot -
     */
     char mintermichar[numSpremenljivke+1][numMintermi][numSpremenljivke];
-    /*
-    Najprej se ga razdeli na dva dela za dve tabeli potem po številu "1" v posameznem mintermu,
-    potem na število mintermov, in spet na število spremenljivk da lahko shranimo ta minterm
-    */
 
    for(int k = 0;k < numSpremenljivke+1;k++)//tukaj se jih zapiše v spremenljivko
    {
@@ -90,7 +99,8 @@ int main()
         }
 
    }
-
+    //napiši najprej št spremenljivk in št mintermov
+    std::cout << numSpremenljivke << "\n" << numMintermi << "\n";
     //dodaj še ignoriranje pik
     for(int i = 0;i < numSpremenljivke+1;i++)//printanje spremenljivke
     {
@@ -109,14 +119,13 @@ int main()
             }
             
         }
-        std::cout << "\n\n";
     }
 
-    //treba je še dodati pisanje v .txt minimizacija v drugem programu
-    //mogoče bi se v conzoli nardil input.txt > obdelavapodatkov.exe > out.txt
-    //in potem out.txt > minimizacija.txt > rezultati.txt
+    //zraven damo še vhodne vrednosti
+    for(int i = 0;i < numMintermi;i++)
+    {
+        std::cout << mintermi[i] << std::endl;
+    }
 
-    system("pause");
     return 0;
-
 }
